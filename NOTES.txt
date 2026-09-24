@@ -1,0 +1,8 @@
+version:0.1-11
+
+Notes about release:
+
+Transitioned to uv managed workspaces
+Integrated external python tools as libraries
+
+

@@ -1,0 +1,5 @@
+dependent_parameters:
+  itemA: nondefA
+  itemB: nondefB
+exclusive_parameters:
+  itemC: nondefC

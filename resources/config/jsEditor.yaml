@@ -1,0 +1,5 @@
+version: 0.1a
+title: "Java Script editor"
+initial_width: 800
+initial_height: 600
+jshint_binary: /opt/homebrew/bin/jshint
