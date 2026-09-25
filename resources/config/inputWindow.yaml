@@ -1,0 +1,11 @@
+version: 0.1a
+title: "Input"
+initial_width: 300
+initial_height: 700
+input_type:
+  - float
+  - int
+  - string
+  - enum
+  - File
+  - Directory

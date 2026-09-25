@@ -1,0 +1,294 @@
+# Application version (major.minor)
+version: 0.1
+# Title of the appication when an empty window shows up
+title: Input
+# Default workspace directory. Leave null to choose one on first run
+# (the app does not expand '~', so use an absolute path if you set it).
+workspace: null
+# specify the LLM configuration (provider, model, base_url, key env, etc.)
+# Supports standard cloud models as well as local endpoints (Ollama/LM Studio)
+llm:
+  provider: google_genai
+  LLMModel: gemini-2.5-flash
+  base_url: null
+  temperature: 0.1
+  max_tokens: 4096
+  api_key_env: GOOGLE_API_KEY
+# Default size and font for the application
+main_window:
+  initial_width: 1400
+  initial_height: 1400
+  font_family: Arial
+  font_size: 13
+# Formatting options for various labels and windows
+label_width: 250
+code_editor:
+  font_family: Monaco
+  font_size: 13
+# Font and size for the command line window
+command_line_window:
+  initial_width: 400
+  font_family: Monaco
+  font_size: 15
+input_window:
+  initial_width: 400
+  id_width: 200
+  type_width: 200
+  glob_width: 600
+  prefix_width: 200
+  value_width: 400
+  order_width: 50
+graph_node:
+  label_font_size: 30
+  port_font_size: 26
+# locations of various icons used
+# in the application
+# all icons referenced in the application are relative
+# to the location of the main application script
+icons:
+  programming: resources/icons/code.png
+  remove: resources/icons/delete.png
+  add: resources/icons/add.png
+  edit: resources/icons/edit.png
+  info: resources/icons/info.png
+  ai: resources/icons/sparkler.png
+  workflow: resources/icons/workflow.png
+  tool: resources/icons/tool.png
+  cwllogo: resources/icons/CWL-Logo.png
+  uparrow: resources/icons/up.png
+  downarrow: resources/icons/down.png
+  v1.0: resources/icons/v1.0.png
+  v1.1: resources/icons/v1.1.png
+  v1.2: resources/icons/v1.2.png
+  save: resources/icons/save.png
+  repackage: resources/icons/package.png
+  reload: resources/icons/reload.png
+  gitcommit: resources/icons/gitcommit.png
+  gitpush: resources/icons/gitpush.png
+  gitpull: resources/icons/gitpull.png
+defaults_values:
+  default_min_ram: 1000
+# supported CWL versions.
+# all versions are supported through the
+# cwl_parser 
+cwl_version:
+- name: v1.0
+  supported: true
+- name: v1.1
+  supported: true
+- name: v1.2
+  supported: true
+# the default cwl version to use for a new tool/workflow
+default_cwl_version: v1.0
+# apply formatting rules to how the ids are created
+# this affects new ids, not existing ones
+# camelCase
+# UpperCamelCase
+# lowerCamelCase
+# dash (replace space with -)
+# keepAlphaNum (remove non alphanumeric characters)
+# underscore (replace space with _)
+sanitize_id: underscore
+
+# Paths to add to PATH environment variable
+# where some of the utilities are located
+# One can add the full path in the cwl_runner section
+# but some utilities call other tools e.g. nodejs which
+# may not be in the default PATH
+# Absolute paths only ('~' is not expanded). Add the directory holding
+# cwltool/nodejs if they are not on the default PATH, e.g.
+#   - /opt/homebrew/bin/
+#   - /usr/local/bin/
+paths:
+  - /opt/homebrew/bin/
+# commands to run various cwltool related operations
+# that are accessible through the application
+cwl_runner:
+  execute: cwltool --strict-cpu-limit --strict-memory-limit
+  validate: cwltool --disable-color --no-warnings --validate
+  maketemplate: cwltool --make-template
+  pack: cwlpack --filter-non-sbg-tags --add-ids
+  upgrade: cwl-upgrader --always-write
+  normalize: cwl-upgrader
+  explode: cwl-explode
+# logging level of various classes of the application
+# the code in the class should have this format to enable class level logging control
+# self.logger.setLevel(data.configuration.get('logLevel',{}).get(self.__class__.__name__, 'WARNING'))
+# the code in a class should have this format to enable file level logging control
+# self.logger.setLevel(data.configuration.get('logLevel',{}).get(__name__, 'WARNING'))
+#
+# Third-party libraries (see THIRD_PARTY_LOGGERS in logger.py) are held at
+# WARNING so their internals stay out of the log. Naming one here raises it
+# back up for debugging, e.g.
+#   urllib3: DEBUG
+#   cwltool: INFO
+logLevel:
+  ArgumentDialog: WARNING
+  ChildWindow: INFO
+  CodeWindow: WARNING
+  CWLGraph: WARNING
+  CWLGraph_edges: WARNING
+  CWLGraph_ports: WARNING
+  CWLGraph_splitports: WARNING
+  CWLGraph_tooltip: WARNING
+  CWLGraph_makeedges: WARNING
+  CWLtoolFactory: WARNING
+  cwl_fetcher: WARNING
+  ConfigDialog: WARNING
+  Configuration: INFO
+  CommandLine: WARNING
+  ConnectingLine: WARNING
+  CWLGraphWidget: WARNING
+  CWLNode: WARNING
+  CWLRunner: WARNING
+  DialogInput: WARNING
+  ErrorDialog: WARNING
+  FindReplaceDialog: WARNING
+  FlowLayout: WARNING
+  formatCWL: WARNING
+  formatCWL.pre: WARNING
+  formatCWL.post: WARNING
+  GraphicSummaryWidget: WARNING
+  GraphWidgetWithZoom: WARNING
+  InputNode: WARNING
+  InputNode_tooltip: WARNING
+  InputNode_splitports: WARNING
+  InputNode_ports: WARNING
+  InputNode_edges: WARNING
+  InputRowWidget: WARNING
+  InfoWindow: WARNING
+  InputDialog: WARNING
+  InputWorkflowDialog: WARNING
+  JavaScriptEditorDialog: WARNING
+  LevelBasedFormatter: WARNING
+  MainWindow: WARNING
+  MainWindow.Menu: WARNING
+  MovableBox: WARNING
+  OutputDialog: WARNING
+  OutputNode: WARNING
+  OutputNode_tooltip: WARNING
+  OutputNode_splitports: WARNING
+  OutputNode_edges: WARNING
+  OutputNode_ports: WARNING
+  Parser: WARNING
+  PortSplitter: WARNING
+  QAddButton: WARNING
+  QArgumentsGroupWidget: WARNING
+  QArgumentWidget: WARNING
+  QBaseCommandGroupWidget: WARNING
+  QBaseCommandWidget: WARNING
+  QCodeButton: WARNING
+  QDockerWidget: WARNING
+  QEditButton: WARNING
+  QEnvVar: WARNING
+  QEnvVarGroupWidget: WARNING
+  QErrorMessage: WARNING
+  QExternalLinks: WARNING
+  QExternalLinksGroupWidget: WARNING
+  QInitialWorkDirGroup: WARNING
+  QInputsGroupWidget: WARNING
+  QInputWidget: WARNING
+  QLabelLineEditWidget: WARNING
+  QLabelTextEditWidget: WARNING
+  QLineSeparator: WARNING
+  QOutputsGroupWidget: WARNING
+  QOutputWidget: WARNING
+  QRemoveButton: WARNING
+  QRequirementsWidget: WARNING
+  QResourceRequirementsWidget: WARNING
+  QSecondaryFiles: WARNING
+  QSecondaryFilesGroupWidget: WARNING
+  QTagWidget: WARNING
+  QToggle: WARNING
+  QWorkDir: WARNING
+  sanitize: WARNING
+  StepDialog: WARNING
+  StepNode: WARNING
+  StepNode_tooltip: WARNING
+  StepNode_splitports: WARNING
+  StepNode_ports: WARNING
+  StepNode_edges: WARNING
+  StepNode_edges_stepinput: WARNING
+  StepNode_edges_stepstep: WARNING
+  Tag: WARNING
+  TabToolEditor: WARNING
+  TabCodeEditor: WARNING
+  TabSummary: WARNING
+  TabWorkflowEditor: WARNING
+  ToolNode: WARNING
+  ToolEditor: WARNING
+  ToolEditor.requirements: WARNING
+  ToolEditor.sortCWL: WARNING
+  ToolEditor.setcwl: WARNING
+  ToolEditor.envvar: WARNING
+  ToolEditor.inputs: WARNING
+  WorkflowEditor: WARNING
+  WorkspaceContents: WARNING
+
+
+
+# available cwl types
+# this
+CWL_types:
+- boolean
+- Directory
+- double
+- enum
+- File
+- float
+- int
+- long
+- record
+- string
+
+data_types:
+  runtime:
+  - cores
+  - outdir
+  - outdirSize
+  - ram
+  - tmpdir
+  - tmpdirSize
+  File:
+  - basename
+  - checksum
+  - contents
+  - dirname
+  - format
+  - location
+  - nameroot
+  - nameext
+  - path
+  - size
+  Directory:
+  - basename
+  - listing
+  - location
+  - path
+  CWL_datastructures:
+  - boolean
+  - Directory
+  - double
+  - enum
+  - File
+  - float
+  - int
+  - long
+  - record dependent arguments
+  - record mutually exclusive arguments
+  - string
+  CWL_datastructures_output:
+  - boolean
+  - Directory
+  - double
+  - enum
+  - File
+  - float
+  - int
+  - long
+  - stderr
+  - stdout
+  - string
+  - record dependent arguments
+  - record mutually exclusive arguments
+
