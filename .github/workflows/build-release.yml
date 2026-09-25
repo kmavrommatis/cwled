@@ -12,13 +12,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v6
         with:
-          python-with-uv: true
           python-version: '3.10'
+          enable-cache: true
 
       - name: Install dependencies
         run: uv sync --group dev
@@ -27,7 +27,7 @@ jobs:
         run: make debug-mac
 
       - name: Upload DMG artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: macos-dmg
           path: dist/CWLed-Installer.dmg
@@ -37,13 +37,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v6
         with:
-          python-with-uv: true
           python-version: '3.10'
+          enable-cache: true
 
       - name: Install dependencies
         run: uv sync --group dev
@@ -52,7 +52,7 @@ jobs:
         run: make debug-linux
 
       - name: Upload Linux Tarball
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: linux-tarball
           path: dist/CWLed-Linux.tar.gz
@@ -65,16 +65,16 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Download macOS artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: macos-dmg
           path: dist/
 
       - name: Download Linux artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: linux-tarball
           path: dist/
