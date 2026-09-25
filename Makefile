@@ -7,6 +7,13 @@ DMG_NAME = CWLed-Installer.dmg
 LINUX_DIST_FOLDER = cwled-linux
 TAR_NAME = CWLed-Linux.tar.gz
 
+# PyInstaller output names - these MUST match cwled.spec.
+# They are lowercase there, so referring to them via APP_NAME only works on
+# case-insensitive filesystems (macOS) and silently fails on Linux.
+PYI_COLLECT_NAME = cwled
+PYI_EXE_NAME = cwled_app
+PYI_BUNDLE_NAME = cwled.app
+
 # Detect OS
 UNAME_S := $(shell uname -s)
 
@@ -32,7 +39,7 @@ prepare-dist:
 	@echo "Preparing distribution folder..."
 	cd dist && \
 	mkdir -p '$(DIST_FOLDER)' && \
-	mv $(APP_NAME).app '$(DIST_FOLDER)/$(APP_NAME).app' && \
+	mv $(PYI_BUNDLE_NAME) '$(DIST_FOLDER)/$(APP_NAME).app' && \
 	ln -s /Applications '$(DIST_FOLDER)/Applications'
 
 # Create DMG file using hdiutil
@@ -80,7 +87,7 @@ prepare-icons:
 linux: linux-build linux-dist linux-tar
 
 # Build the Linux executable using PyInstaller
-linux-build:
+linux-build: update-version
 	@echo "Building $(APP_NAME) for Linux..."
 	rm -rf dist/ build/
 	uv run pyinstaller --noconfirm --clean cwled.spec
@@ -90,14 +97,13 @@ linux-dist:
 	@echo "Preparing Linux distribution..."
 	cd dist && \
 	mkdir -p '$(LINUX_DIST_FOLDER)' && \
-	if [ -d "$(APP_NAME)" ]; then \
-		cp -r $(APP_NAME)/* '$(LINUX_DIST_FOLDER)/'; \
-	elif [ -f "$(APP_NAME)" ]; then \
-		cp $(APP_NAME) '$(LINUX_DIST_FOLDER)/'; \
+	if [ -d "$(PYI_COLLECT_NAME)" ]; then \
+		cp -r $(PYI_COLLECT_NAME)/* '$(LINUX_DIST_FOLDER)/'; \
+	else \
+		echo "ERROR: dist/$(PYI_COLLECT_NAME) not found - did PyInstaller run?"; \
+		exit 1; \
 	fi && \
-	echo '#!/bin/bash' > '$(LINUX_DIST_FOLDER)/run.sh' && \
-	echo 'cd "$$(dirname "$$0")"' >> '$(LINUX_DIST_FOLDER)/run.sh' && \
-	echo './$(APP_NAME)' >> '$(LINUX_DIST_FOLDER)/run.sh' && \
+	printf '#!/bin/bash\ncd "$$(dirname "$$0")"\nexec ./$(PYI_EXE_NAME) "$$@"\n' > '$(LINUX_DIST_FOLDER)/run.sh' && \
 	chmod +x '$(LINUX_DIST_FOLDER)/run.sh'
 
 # Create tarball for Linux
