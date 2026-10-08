@@ -53,56 +53,13 @@ The architecture of CWLed is designed for flexibility, catering to both visual-o
 
 # Installation
 
-## MacOS
-Use the provided .dmg file to install the application on macOS systems.
-In case you get an error that MacOS cannot verify the developer of the app, go to System Preferences -> Security & Privacy and under the General tab click 'Open Anyway' for CWLed.
-or run
+Check the `README.md` file
 
-```
-xattr -d com.apple.quarantine /path/to/CWLed.app
-```
-
-The application requires some external tools to be installed, namely :
-`cwltool` (v3+) (`pip install cwltool`)
-`node` (v24+) (install from https://nodejs.org/)
-`cwlformat` > 2022.2.18 (`pip install cwlformat`: provides cwl-explode)
-`sbpack` >= 2024.12.17 (`pip install sbpack`: provides cwlpack)
-
-These are installed when the application is installed from the command line (see below) but if you use the .dmg file you need to install them manually.
-
-
-## Linux
-In some Linux installations one may have to install libxcb-cursor. 
-If an error like the following pops up 
-```
-qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed to load the Qt xcb platform plugin
-```
-Run
-`apt install libxcb-cursor-dev`
-
-## Manual
-
-```
-conda create --name cwled python=3.10
-
-conda activate cwled
-
-git clone https://github.com/kmavrommatis/cwled.git cwled
-cd cwled
-pip install -r requirements.txt
-
-```
 
 ## Integration with LLMs 
 
-To enable the use of LLMs (ChatGPT, Google gemini etc.) make sure that 
-entry `LLModel` in ${CONFIG_DIR}/cwled.yaml is set to the desired model (using Langchain model names)
-Currently the models by OpenAI, Google and Anthropic are supported.
-Add the file ${CONFIG_DIR}/cwled.env in the cwled folder with the required API keys, e.g.  
 
-`OPENAI_API_KEY=<your_openai_api_key_here>`
-Or
-`GOOGLE_API_KEY=<your_google_gemini_api_key_here>`
+Check the `README.md` file
 
 # Usage
 
