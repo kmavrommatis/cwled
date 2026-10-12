@@ -1,0 +1,22 @@
+version:0.1-11d
+
+Notes about release:
+- Transitioned to uv managed workspaces
+- Integrated external python tools as libraries
+- fixed icons of application
+- reset configuration argument
+- if the workspace directory is not accessible reset it
+- better documentation about the tests
+- ensure the window is not larger than the screen
+- added cwl version column in the Workspace window
+- show the format of the file in the workspace window
+- make sure that if a file is opened, or the workspace is opened, we bring that window forward instead of reopening it
+- when we save the file with a new name it does not appear in the list of recently opened files
+- when a tool is updated the notifications of the tool and the workflow (that the tool has been updated) conflict
+- the "Recents" list now disambiguates the entries with the same filename.
+- remember where we were in the App tab and the Code app when moving between tabs
+- handle records as inputs to the workflow
+- handle defaults for records in workflows and tools
+
+
+
