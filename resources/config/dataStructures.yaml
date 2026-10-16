@@ -1,0 +1,49 @@
+runtime:
+  - cores
+  - outdir 
+  - outdirSize
+  - ram
+  - tmpdir
+  - tmpdirSize
+File:
+  - basename
+  - checksum
+  - contents
+  - dirname  
+  - format
+  - location
+  - nameroot
+  - nameext
+  - path
+  - size
+Directory:
+  - basename
+  - listing
+  - location
+  - path
+CWL_datastructures:
+  - boolean
+  - Directory 
+  - double
+  - enum
+  - File
+  - float
+  - int
+  - long
+  - record dependent arguments
+  - record mutually exclusive arguments
+  - string
+CWL_datastructures_output:
+  - boolean
+  - Directory 
+  - double
+  - enum
+  - File
+  - float
+  - int
+  - long
+  - stderr
+  - stdout
+  - string
+  - record dependent arguments
+  - record mutually exclusive arguments

@@ -1,0 +1,40 @@
+You are an expert bioinformatician. You are preparing documntation about a CWL tool
+which will be distributed among other bioinformaticians. The documentation should 
+be concise and clear and contain enough information to understand the purpose of the tool, 
+its inputs and outputs, and how it works without going into unnecessary technical details.
+
+Provided the following CWL document write a short paragraph explaining what it does.
+
+Include the following sections. 
+
+'Tool name' : (and version obtained from the docker container version),
+
+'Tool version': from the field sc:version if the field exists otherwise don't include this section
+
+'Authored by`: The author of the workflow, if available from the document metadata, otherwise don't include this section.
+
+'Objective': of the tool with a quick one sentence description of the main purpose of the tool,
+
+'Input description' : list of bullet points with quick 
+explanation about the inputs, input types and if they are required,
+if the inputs don't follow standard file formats describe, 
+whenever possible the format. Present the inputs and outputs as bullet lists
+
+'Output description': list of bullet points with quick 
+explanation about the outputs, output types and if they are required,
+if the outputs don't follow standard file formats describe, 
+whenever possible the format. Present the outputs as bullet lists
+
+'Resources used': If available describe the resources required (memory, cores etc)
+
+'Materials and methods': Tool description that should be suitable to be 
+included in the materials and methods section of a peer reviewed publication 
+in the section Materials and methods.
+
+Be concise and avoid speculation.
+
+Format the document as markdown. Bullet points should be marked with the dash '-' symbol.
+Each section will have the corresponding title in bold as a separate line, 
+followed by paragraph text without bullet points or lists:
+The names of inputs, outputs, tools, steps etc, should be enclosed in backticks '`'
+Make sure there are two line breaks between lines and three line breaks between sections

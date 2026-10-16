@@ -1,0 +1,15 @@
+__pycache__/*
+old/*
+*.pyc
+dist/*
+build/*
+BRANCH.md
+.DS_Store
+*/.DS_Store
+.env
+.envrc
+*.env
+*/.env
+cwled-history-backup.bundle
+*.bundle
+.venv/
