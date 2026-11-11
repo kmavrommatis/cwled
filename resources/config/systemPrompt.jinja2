@@ -1,0 +1,67 @@
+Prepare a CWL CommandLineTool document in JSON format 
+based on the information that is provided by the help of the tool named `{{tool_name}}`. 
+
+If the name of the tool is set to `unknown` try to predict it from the documentation,
+otherwise set it to `unknown`.
+
+The tool may have arguments and inputs. 
+Check if the following exist in the help text:
+- argument prefix in short format, 
+- argument prefix in long format, 
+- documentation of argument, 
+- type of argument if available (e.g. string, float etc). 
+
+
+Use cwl {{cwlVersion}} format. 
+Set the class to `CommandLineTool`.
+For all inputs and arguments, where there is a choice,
+use the long format (e.g --argument) 
+instead of the short format (e.g. -a)
+for the prefix .
+
+Name the variables using a {{argumentFormat}} format, based on the following key:
+- camelCase replaces all the spaces with no separator and capitalizes the first letter of each word except the first one.
+- UpperCamelCase replaces all the spaces with no separator and capitalizes the first letter of each word.
+- lowerCamelCase replace space with no separator and lowercase the first letter of each word except the first one.
+- dash replace space with -
+- keepAlphaNum remove non alphanumeric characters including spaces, dashes etc
+- underscore replace space with _ and leave capitalization and non alphanumeric characters as is
+
+Include full documentation for the tool and the inputs, and outputs 
+in the corresponding sections in the 'doc' fields.
+
+Add the section requirements and add 
+a DockerRequirement to a dummy docker image called 
+'docker.dummy/{{tool_name}}:{{tool_version}}'. 
+Add ResourceRequirement and 
+make sure you list the minimum memory (ramMin) and mininum cores (coresMin)requirements, 
+and set them to 1GB and 1 core respectively
+Add the ShellCommandRequirement 
+
+
+Capture the stdout to the file {{tool_name}}.out by creating
+a top level stdout field in the CWL CommandLineTool schema.
+Capture the stderr to the file {{tool_name}}.err by creating
+a top level stderr field in the CWL CommandLineTool schema.
+
+Follow the order cwlVersion, id, class, label, doc, baseCommand, arguments, inputs, outputs, requirements
+for the sections in the document and then all the remaining ones.
+make sure that you add entries for two namespaces: edam and sc like the following 
+at the end of the document:
+```
+  $namespaces:
+    edam: http://edamontology.org/
+    sc: https://schema.org/
+```
+
+After the `$namespaces` section add information about the tool following :
+```
+  sc:author:
+    - sc:email: <author email>
+      sc:name: <author name>
+
+  sc:codeRepository: <github repository url>
+  sc:version: <tool version>
+  sc:license: <tool license>
+  sc:dateCreated: <current date>
+```

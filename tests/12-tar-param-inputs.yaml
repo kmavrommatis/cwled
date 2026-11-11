@@ -1,0 +1,4 @@
+extractfile: a_string
+tarfile:
+  class: File
+  path: test.tgz
